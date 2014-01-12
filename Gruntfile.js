@@ -1,56 +1,124 @@
-"use strict";
+/*
+ * Gruntfile.js
+ * @author Osiris
+ * @version 1.0.0
+ */
+
+'use strict';
 
 module.exports = function(grunt) {
 
+  require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+
   // Project configuration.
   grunt.initConfig({
-    distFolder: 'dist',
     pkg: grunt.file.readJSON('package.json'),
+
+    tag: {
+      banner: "/*!\n" +
+              " * @author Osiris\n" +
+              " * @version 1.0.0\n" +
+              " * Copyright 2014.\n" +
+              "<%= grunt.template.today('yyyy-mm-dd') %> \n"+
+              " */\n"
+    },
+
     uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      prod:{
+        options: {
+             banner: "<%= tag.banner %>"
+        },
+        src: 'public/js/**/*.js',
+        dest: 'public/js-uglify/default.min.js'
       },
-      my_target: {
+
+      dev:{
+        options: {
+             banner: "<%= tag.banner %>"
+        },
         files: [{
-            expand: true,
-            cwd: 'public/js',
-            src: '**/*.js',
-            dest: 'public/uglify/js'
+              expand: true,
+              cwd: 'public/js',
+              src: '**/*.js',
+              dest: 'public/js-uglify/'
         }]
       }
     },
-     concat: {
-      // Specify some options, usually specific to each plugin.
+
+    csslint: {
       options: {
-        // Specifies string to be inserted between concatenated files.
-        separator: ';'
+        csslintrc: '.csslintrc'
       },
-      // 'dist' is what is called a "target."
-      // It's a way of specifying different sub-tasks or modes.
-      dist: {
-        // The files to concatenate:
-        // Notice the wildcard, which is automatically expanded.
-        src: ['public/uglify/**/*.js'],
-        // The destination file:
-        // Notice the angle-bracketed ERB-like templating,
-        // which allows you to reference other properties.
-        // This is equivalent to 'dist/main.js'.
-        dest: 'public/production/default.js'
-        // You can reference any grunt config property you want.
-        // Ex: '<%= concat.options.separator %>' instead of ';'
+      src: ['public/css/**/*.css']
+      
+    },
+
+    jshint: {
+      // define the files to lint
+      files: ['Gruntfile.js','src/**/*.js', 'public/**/*.js'],
+      // configure JSHint (documented at http://www.jshint.com/docs/)
+      options: {
+          // more options here if you want to override JSHint defaults
+        globals: {
+          jQuery: true,
+          console: true,
+          module: true,
+          "$": true
+        },
+        jshintrc: '.jshintrc'
+      }
+    },
+
+    watch: {
+      files: ['<%= jshint.files %>','<%= csslint.src %>','views/**/*.hbs','src/**/*.*'],
+      tasks: ['jshint', 'csslint','htmlhint'],
+      options: {
+        spawn: false, // Without this option specified express won't be reloaded
+        livereload: true
+      }
+    },
+
+    express: {
+      options: {
+        port: 3000
+        // Override defaults here
+      },
+      dev: {
+        options: {
+          script: 'app.js',
+          node_env: 'development'
+        }
+      },
+      prod: {
+        options: {
+          script: 'app.js',
+          node_env: 'production'
+        }
+      },
+      test: {
+        options: {
+          script: 'app.js'
+        }
+      }
+    },
+    
+    open : {
+      dev : {
+        path: 'http://localhost:3000',
+        app: 'Google Chrome'
+      },
+      file : {
+        path : '/etc/hosts'
       }
     }
+
   });
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  
-  // We've set up each task's configuration.
-  // Now actually load the tasks.
-  // This will do a lookup similar to node's require() function.
-  grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Register our own custom task alias.
-  grunt.registerTask('default', ['uglify','concat']);
+  grunt.registerTask('prod', ['uglify:prod','csslint','jshint']);
+
+  // Register our own custom task alias.
+  grunt.registerTask('default', ['uglify:dev','csslint','jshint','express:dev','open:dev','watch']);
 
 };

@@ -1,1 +1,2 @@
-var a =";p";
+"use strict";
+var ta = 2;

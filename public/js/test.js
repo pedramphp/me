@@ -1,4 +1,2 @@
 "use strict";
-
-var i =1;
-var d =2;
+var t = 2;
