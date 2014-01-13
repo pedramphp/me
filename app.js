@@ -6,12 +6,27 @@ var express = require('express'),
     hbs,
     VIEW_EXT_NAME = ".hbs";
 
-
+var blocks = [];
 hbs = exphbs.create({
     // Specify helpers which are only registered on this instance.
     helpers: {
         foo: function () { return 'FOO!'; },
-        bar: function () { return 'BAR!'; }
+        bar: function () { return 'BAR!'; },
+        extend: function (name, context){
+           var block = blocks[name];
+           if (!block) {
+               block = blocks[name] = [];
+           }
+
+           block.push(context.fn(this)); // for older versions of handlebars, use block.push(context(this));
+        },
+        block: function (name){
+            var val = (blocks[name] || []).join('\n');
+
+           // clear the block
+           blocks[name] = [];
+           return val;
+        }
     },
     defaultLayout: 'main',
     // Uses multiple partials dirs, templates in "shared/templates/" are shared
@@ -77,7 +92,8 @@ app.get('/', exposeTemplates, function(req, res) {
 		// Override `foo` helper only for this rendering.
         helpers: {
             foo: function () { return 'foo.'; }
-        }
+        },
+        layout: "farzin"
 	});
 });
 

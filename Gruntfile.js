@@ -71,7 +71,7 @@ module.exports = function(grunt) {
 
     watch: {
       files: ['<%= jshint.files %>','<%= csslint.src %>','views/**/*.hbs','src/**/*.*'],
-      tasks: ['jshint', 'csslint','htmlhint'],
+      tasks: ['jshint', 'csslint'],
       options: {
         spawn: false, // Without this option specified express won't be reloaded
         livereload: true
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
     open : {
       dev : {
         path: 'http://localhost:3000',
-        app: 'Google Chrome'
+        app: 'chrome.exe'
       },
       file : {
         path : '/etc/hosts'
