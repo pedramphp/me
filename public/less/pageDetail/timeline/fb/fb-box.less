@@ -7,7 +7,7 @@
 	> header{
 		background: #2e4c8c;	
 		&::before{
-			position: absolute;
+			.absolute();
 			left: 12px;
 			top: 8px;
 			content: "f";
@@ -15,24 +15,34 @@
 			font-size: 20px;
 		}
 	}
+	.fb-box{
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+		border-bottom: 1px solid #ddd;
+
+		&.last{
+			margin: 0;
+			border-bottom: none;
+		}
+	}
 }
 
 
 .fb-box{
-	position: relative;
+	.relative();
 	a{
-		color: #3b5998;
+		color: @fb-link-color;
 		cursor: pointer;
 		text-decoration: none;
 
-		&::hover{
+		&:hover{
 			text-decoration: underline;
 		}
 	}
 }
 
 .fb-img-thumb{
-	position: absolute;
+	.absolute();
 	top: 0;
 	left: 0;
 	width: 50px;
@@ -84,10 +94,10 @@
 	}
 	.fb-comments-summary::before,
 	.fb-comments-total::before{
-		position: absolute;
+		.absolute();
 		content: "";
 		display: block;
-		background: url("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yc/r/txap4ouPYSe.png");
+		background: url(@fb-sprite);
 		width: 15px;
 		height: 16px;
 	}
