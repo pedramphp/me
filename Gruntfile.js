@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       options: {
         csslintrc: '.csslintrc'
       },
-      src: ['public/css/**/*.css']
+      src: ['public/css/pageDetailss/**/*.css']
       
     },
 
@@ -70,11 +70,25 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      files: ['<%= jshint.files %>','<%= csslint.src %>','views/**/*.hbs','src/**/*.*'],
-      tasks: ['jshint', 'csslint'],
+      files: ['<%= jshint.files %>','<%= csslint.src %>','views/**/*.hbs','src/**/*.*','public/less/**/*.less'],
+      tasks: ['jshint', 'csslint','less:dev'],
       options: {
         spawn: false, // Without this option specified express won't be reloaded
         livereload: true
+      }
+    },
+
+    less: {
+      dev: {
+        files: [{
+              expand: true,
+              cwd: 'public/less',
+              src: '**/*.less',
+              dest: 'public/css/',
+              rename: function(dest, src) {
+                return dest + src.slice(0, -5)+ '.css';
+              }
+        }]
       }
     },
 
@@ -105,7 +119,9 @@ module.exports = function(grunt) {
     open : {
       dev : {
         path: 'http://localhost:3000',
-        app: 'chrome.exe'
+//        app: 'chrome.exe'
+        app: 'Google Chrome'
+
       },
       file : {
         path : '/etc/hosts'
@@ -119,6 +135,6 @@ module.exports = function(grunt) {
   grunt.registerTask('prod', ['uglify:prod','csslint','jshint']);
 
   // Register our own custom task alias.
-  grunt.registerTask('default', ['uglify:dev','csslint','jshint','express:dev','open:dev','watch']);
+  grunt.registerTask('default', ['uglify:dev','csslint','jshint','less:dev','express:dev','open:dev','watch']);
 
 };

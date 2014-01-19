@@ -1,10 +1,13 @@
 "use strict";
 var express = require('express'),
 	http =	require('http'),
+    lessMiddleware = require('less-middleware'),
 	app = express(),
     exphbs  = require('express3-handlebars'),
     hbs,
-    VIEW_EXT_NAME = ".hbs";
+    VIEW_EXT_NAME = ".hbs",
+    path = require('path'),
+    pubDir = path.join(__dirname, 'public');
 
 var blocks = [];
 hbs = exphbs.create({
@@ -38,13 +41,28 @@ hbs = exphbs.create({
 });
 
 
+
 app.engine(VIEW_EXT_NAME, hbs.engine);
 
 app.set('view engine', VIEW_EXT_NAME);
 
 app.use(express.bodyParser());
 
-app.use(express.static('public'));
+app.use(app.router);
+
+app.configure(function () {
+    /*
+    app.use(lessMiddleware({
+        dest: '/css',
+        src: '/less',
+        prefix: '/css',
+        root: pubDir,
+        debug: true,
+        force: true
+    }));
+*/
+    app.use(express.static(pubDir));
+});
 
 hbs.loadPartials(function (err, partials) {
     console.log("partials: ", partials);
@@ -93,7 +111,7 @@ app.get('/', exposeTemplates, function(req, res) {
         helpers: {
             foo: function () { return 'foo.'; }
         },
-        layout: "farzin"
+        layout: "main"
 	});
 });
 

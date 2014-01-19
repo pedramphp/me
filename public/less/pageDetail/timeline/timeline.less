@@ -1,0 +1,37 @@
+@import "../../core/core.less";	
+.me-timeline{
+	margin: 100px auto;
+	width: 542px;
+}
+
+
+.me-timeline > section{
+	position: relative;
+	height: 100%;
+	min-height: 100px;
+	width: 100%;
+	
+	//Fixing collapsing margins issue Collapsing margins
+	padding-top: 1px;
+
+	border-radius: 5px;
+	background: #fff;
+	.box-shadow(1px 1px 3px 0px rgba(50, 50, 50, 0.35));
+}
+
+.me-timeline > section > header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 32px;
+	height: 100%;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.me-timeline > section > aside{
+	margin-left: 42px;
+	margin-top: 10px;
+}
+
+@import "fb/fb.less";
