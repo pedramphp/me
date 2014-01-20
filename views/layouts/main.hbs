@@ -6,6 +6,9 @@
     {{{block "stylesheets"}}}    
 </head>
 <body>
+
+
+
    {{{body}}}
 
    {{! Only needs the Handlebars Runtime, because the exposed templates are precompiled. }}
@@ -14,6 +17,10 @@
     <script src="//localhost:35729/livereload.js"></script>
     {{/if}}
     <script>
+
+
+    var a = JSON.parse({{data.timeline}});
+    console.log(a);
         (function () {
             var revive    = Handlebars.template,
                 templates = Handlebars.templates = Handlebars.templates || {};

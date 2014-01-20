@@ -2,17 +2,25 @@
 	<a href="#"> Unlike </a> . 
 	<a href="#"> Comment </a> . 
 	<a href="#"> Share </a> .
+
+
 	<div> 
-		<span>15 minutes ago</span>
+		{{#ifCond this.item.picture '&&' this.item.caption}}
+			
+			{{#if this.item.likes.summary.total_count}}
+			<a href="#" class="icon-fb-like"> <i></i> {{this.item.likes.summary.total_count}}</a>
+			{{/if}}
+			
+			{{#if this.comments.likes.summary.total_count}}
+			<a href="#" class="icon-fb-comment"><i></i> {{this.item.comments.summary.total_count}}</a>
+			{{/if}}
+			
+			{{#if this.item.shares.count}}
+			<a href="#" class="icon-fb-shares"><i></i> {{this.item.shares.count}}</a>
+			{{/if}}
+		{{/ifCond}}
+		<span>{{fromNow this.created_time}}</span>
 		via
-		<span>Instagram</span>
+		<span>{{this.item.application.name}}</span>
 	</div>
-	<!--
-	<span>
-		<a href="#" class="fb-likes-icon-full"> 11,110</a>
-		<a href="#" class="fb-comments-icon-full"> 897</a>
-		<a href="#" class="fb-sahres-icon-full"> 245</a>
-		<span class="fb-post-time-passed"> 12 minutes ago <span>
-	<span>
-	-->
 </div>

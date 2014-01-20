@@ -1,5 +1,38 @@
 @import "../../../core/core.less";
 
+
+[class *=" icon-fb-"],
+[class ^="icon-fb-"]{
+
+	> i{			
+		display: inline-block;
+		height: 16px;
+		width: 16px;
+		background: url(@fb-sprite);
+	}
+
+}
+
+.icon-fb-gen(@height, @width, @positions){
+	> i{
+		height: @height;
+		width: @width;
+		background-position: @positions;
+	}
+}
+
+.icon-fb-like{
+	.icon-fb-gen(13px, 15px, -102px -40px);
+}
+
+.icon-fb-comment{
+	.icon-fb-gen(13px, 15px, -34px -40px);
+}
+
+.icon-fb-shares{
+	.icon-fb-gen(14px, 15px, -68px -40px);
+}
+
 .timeline-fb{
 	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
 	font-size: 13px;
@@ -27,10 +60,6 @@
 			margin: 0;
 			border-bottom: none;
 		}
-	}
-
-	p{
-		margin: 0;
 	}
 }
 
@@ -62,6 +91,11 @@
 		left: 0;
 		width: 50px;
 		height: 50px;
+
+		img{
+			width: 50px;
+			height: 50px;
+		}
 	}
 
 	> .fb-body{
@@ -95,6 +129,50 @@
 		> .fb-status-text-cnt{
 
 		}
+	}
+
+	.fb-status-image{
+		img{
+			width: 320px;
+			height: 320px;
+		}
+	}
+
+	.fb-status-post{
+		background: #f7f7f7;
+		border: 1px solid #f0f0f0;
+		img{
+			width: 398px;
+			height: 207px;
+		}
+
+		span{
+			display: block;
+			font-size: 11px;
+			padding-left: 10px
+		}
+
+		.fb-status-post-title{
+			color: @fb-link-color;
+			font-weight: bold;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+
+		.fb-status-post-caption,
+		.fb-status-post-description{
+			color: gray;
+		}
+
+		.fb-status-post-description{
+			padding-bottom: 10px;
+		}
+
+		> a:hover{
+			text-decoration: none;
+		}
+
 	}
 
 	.fb-link-actions{

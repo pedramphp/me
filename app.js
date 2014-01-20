@@ -7,7 +7,9 @@ var express = require('express'),
     hbs,
     VIEW_EXT_NAME = ".hbs",
     path = require('path'),
-    pubDir = path.join(__dirname, 'public');
+    pubDir = path.join(__dirname, 'public'),
+    routes = require("./src/routes"),
+    moment = require('moment');
 
 var blocks = [];
 hbs = exphbs.create({
@@ -23,13 +25,72 @@ hbs = exphbs.create({
 
            block.push(context.fn(this)); // for older versions of handlebars, use block.push(context(this));
         },
+
         block: function (name){
             var val = (blocks[name] || []).join('\n');
 
            // clear the block
            blocks[name] = [];
            return val;
+        },
+
+        ifStringEqual: function(firstText, secondText, block){
+            
+              if(firstText === secondText) {
+                return block.fn(this);
+              }
+        },
+
+        fbStatusMsg: function(msg){
+            return msg.replace(/#(\S*)/g, function(match, p1, offset, string){
+                return "<a href='https://www.facebook.com/hashtag/" + p1 + "?source=feed_text' target='_blank' >"+ match +"</a>";
+            });
+        },
+
+        fromNow: function(timestamp){
+            return moment(timestamp).fromNow();
+            //return 
+        },
+
+        fbPostImage: function(img){
+            if(!img){
+                return "";
+            }
+            return img.replace("_s.jpg","_n.jpg");
+        },
+
+        ifCond: function (v1, operator, v2, options) {
+
+            switch (operator) {
+                case '==':
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case '===':
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                case '<':
+                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                case '<=':
+                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                case '>':
+                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                case '>=':
+                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                case '&&':
+                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                case '||':
+                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
+            }
+        },
+
+        fbCommentMoreTotal: function(totalComment){
+            totalComment = totalComment - 4;
+            if(totalComment < 0){
+                return 0;
+            }
+            return totalComment;
         }
+
     },
     defaultLayout: 'main',
     // Uses multiple partials dirs, templates in "shared/templates/" are shared
@@ -103,17 +164,8 @@ function exposeTemplates(req, res, next) {
     });
 }
 
-app.get('/', exposeTemplates, function(req, res) {
-	res.render('pages/home', {
-        isDev: process.env.NODE_ENV === "development",
-		title: "About Me",
-		// Override `foo` helper only for this rendering.
-        helpers: {
-            foo: function () { return 'foo.'; }
-        },
-        layout: "main"
-	});
-});
+
+app.get('/', exposeTemplates, routes.home);
 
 if(!process.env.NODE_ENV){
     process.env.NODE_ENV = "development";

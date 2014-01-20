@@ -1,16 +1,22 @@
 <div class="fb-box">
-	<a class="fb-img-thumb">
-		<img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/1119182_100000186111641_124765078_q.jpg" />
+	<a href="http://facebook.com/{{this.item.from.id}}" target="_blank" class="fb-img-thumb">
+		<img src="http://graph.facebook.com/{{this.item.from.id}}/picture?type=square" />
 	</a>
 	<div class="fb-body">
-		{{> timeline/fb/profile-header-row}}		
-		<!--
-		<figure>
-			<img src="" />
-		</figure>
-		-->
+		{{> timeline/fb/profile-header-row}}
 		{{> timeline/fb/status-text}}
-		{{> timeline/fb/link-actions}}
-		{{> timeline/fb/comment-box}}
+
+		{{#ifCond this.item.picture '&&' this.item.caption}}
+			{{> timeline/fb/status-post}}
+			{{> timeline/fb/link-actions}}
+		{{else}}	
+			{{#if this.item.picture}}
+				{{> timeline/fb/status-image}}
+			{{/if}}
+			{{> timeline/fb/link-actions}}
+			{{> timeline/fb/comment-box}}			
+		{{/ifCond}}
+		
+
 	</div><!-- /fb-body-->	
 </div><!-- /fb-box-->

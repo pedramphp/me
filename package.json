@@ -17,6 +17,7 @@
     "matchdep": "~0.3.0",
     "less": "~1.6.1",
     "less-middleware": "~0.1.14",
-    "grunt-contrib-less": "~0.9.0"
+    "grunt-contrib-less": "~0.9.0",
+    "moment": "~2.5.0"
   }
 }

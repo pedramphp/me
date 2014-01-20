@@ -1,16 +1,19 @@
 <div class="fb-comment">
-	<img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t5/s32x32/1117846_100001025243416_1906924754_q.jpg" />
+	<img src="http://graph.facebook.com/{{this.from.id}}/picture?type=square" />
 	<div class="fb-comment-detail">
-		<a href="#"> Ramin mo</a>
+		<a href="#">{{this.from.name}}</a>
 		<span>
-		Etefaghan manam daram chaei mikhoram invaresh chaeie onvaresh tofale jat khali 
+		{{this.message}}
 		</span>
 	</div>
 	<div class="fb-comment-time">
-		<abbr>January 16 at 7:15am </abbr> . 
-		<a href="#">Like</a> .
+		<abbr>{{fromNow this.created_time}}</abbr> . 
+		<a href="#">Like</a>
+		{{#ifCond this.like_count '>' 0}}
+		. 
 		<a class="fb-small-like">
-			<i></i> 3
+			<i></i> {{this.like_count}}
 		</a>
+		{{/ifCond}}
 	</div>
 </div> <!--/fb-comments-->

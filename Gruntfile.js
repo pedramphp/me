@@ -55,7 +55,8 @@ module.exports = function(grunt) {
 
     jshint: {
       // define the files to lint
-      files: ['Gruntfile.js','src/**/*.js', 'public/**/*.js'],
+//      files: ['Gruntfile.js','src/**/*.js', 'public/**/*.js'],
+      files: ['Gruntfile.js', 'public/**/*.js'],
       // configure JSHint (documented at http://www.jshint.com/docs/)
       options: {
           // more options here if you want to override JSHint defaults
@@ -70,11 +71,21 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      files: ['<%= jshint.files %>','<%= csslint.src %>','views/**/*.hbs','src/**/*.*','public/less/**/*.less'],
-      tasks: ['jshint', 'csslint','less:dev'],
-      options: {
-        spawn: false, // Without this option specified express won't be reloaded
-        livereload: true
+      staticResources:{
+        files: ['<%= jshint.files %>','<%= csslint.src %>','views/**/*.hbs','src/**/*.*','public/less/**/*.less'],
+        tasks: ['jshint', 'csslint','less:dev'],
+        options: {
+          spawn: false, // Without this option specified express won't be reloaded
+          livereload: true
+        }
+      },
+      node:{
+        files: ['app.js','src/**/*.*'],
+        tasks: ['express:dev'],
+        options: {
+          spawn: false, // Without this option specified express won't be reloaded
+          livereload: true
+        }
       }
     },
 
