@@ -43,6 +43,10 @@ hbs = exphbs.create({
             //return 
         },
 
+        timeHourMin: function(timestamp){
+            return moment(timestamp).format("h:mm a");
+        },
+
         ifCond: function (v1, operator, v2, options) {
 
             switch (operator) {

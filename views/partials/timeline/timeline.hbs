@@ -6,5 +6,9 @@
 			{{> timeline/fb/fb }}
 
 		{{/ifStringEqual}}
+		{{#ifStringEqual this.type "instagram"}}
+			{{> timeline/instagram/instagram }}
+
+		{{/ifStringEqual}}
 	{{/each}}
 </div>

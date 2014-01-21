@@ -1,0 +1,32 @@
+<div class="ig-box{{#if $last}} last{{/if}}">
+
+	<header class="ig-profile">
+		<span class="ig-user-img-large">
+			<a href="#" class="ig-user-img-link">
+				<img src="{{this.item.user.profile_picture}}" />
+			</a>
+			<a href="#" class="ig-link">
+				{{this.item.user.username}}
+			</a>
+		</span>
+	</header>
+
+	<div class="ig-image">
+		<a href="#">
+			<img src="{{this.item.images.standard_resolution.url}}" />
+		</a>
+	</div>
+
+	<div class="ig-status">
+		<span class="ig-user-img-small">
+			<a href="#" class="ig-user-img-link">
+				<img src="{{this.item.user.profile_picture}}" />
+			</a>
+			<a href="#" class="ig-link">
+				{{this.item.user.username}}
+			</a>
+		</span>
+		
+	</div>
+
+</div><!-- /ig-box-->
