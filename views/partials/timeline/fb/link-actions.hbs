@@ -3,10 +3,8 @@
 	<a href="#"> Comment </a> . 
 	<a href="#"> Share </a> .
 
-
 	<div> 
 		{{#ifCond this.item.picture '&&' this.item.caption}}
-			
 			{{#if this.item.likes.summary.total_count}}
 			<a href="#" class="icon-fb-like"> <i></i> {{this.item.likes.summary.total_count}}</a>
 			{{/if}}

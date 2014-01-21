@@ -1,7 +1,10 @@
 <div class="me-timeline">
-	{{#each data.timeline.feeds}}
-	  {{#ifStringEqual this.type "fb"}}
-		{{> timeline/fb/fb }}
-	  {{/ifStringEqual}}
+
+	{{#each data.timeline.feeds_group}}
+		{{#ifStringEqual this.type "fb"}}
+		
+			{{> timeline/fb/fb }}
+
+		{{/ifStringEqual}}
 	{{/each}}
 </div>

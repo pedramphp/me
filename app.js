@@ -1,7 +1,6 @@
 "use strict";
 var express = require('express'),
 	http =	require('http'),
-    lessMiddleware = require('less-middleware'),
 	app = express(),
     exphbs  = require('express3-handlebars'),
     hbs,
@@ -15,8 +14,6 @@ var blocks = [];
 hbs = exphbs.create({
     // Specify helpers which are only registered on this instance.
     helpers: {
-        foo: function () { return 'FOO!'; },
-        bar: function () { return 'BAR!'; },
         extend: function (name, context){
            var block = blocks[name];
            if (!block) {
@@ -41,22 +38,9 @@ hbs = exphbs.create({
               }
         },
 
-        fbStatusMsg: function(msg){
-            return msg.replace(/#(\S*)/g, function(match, p1, offset, string){
-                return "<a href='https://www.facebook.com/hashtag/" + p1 + "?source=feed_text' target='_blank' >"+ match +"</a>";
-            });
-        },
-
         fromNow: function(timestamp){
             return moment(timestamp).fromNow();
             //return 
-        },
-
-        fbPostImage: function(img){
-            if(!img){
-                return "";
-            }
-            return img.replace("_s.jpg","_n.jpg");
         },
 
         ifCond: function (v1, operator, v2, options) {
@@ -83,14 +67,37 @@ hbs = exphbs.create({
             }
         },
 
-        fbCommentMoreTotal: function(totalComment){
-            totalComment = totalComment - 4;
-            if(totalComment < 0){
-                return 0;
-            }
-            return totalComment;
-        }
+        foreach: function(arr, options) {
+            if(options.inverse && !arr.length)
+                return options.inverse(this);
 
+            return arr.map(function(item,index) {
+                item.$index = index;
+                item.$first = index === 0;
+                item.$last  = index === arr.length-1;
+                return options.fn(item);
+            }).join('');
+        },
+
+        foreachSlice: function(arr, action, quantity, options) {
+            if(options.inverse && !arr.length)
+                return options.inverse(this);
+            
+            if( action === "last" && quantity){
+                arr = arr.slice(-1 * quantity);
+            }
+
+            return arr.map(function(item,index) {
+                item.$index = index;
+                item.$first = index === 0;
+                item.$last  = index === arr.length-1;
+                return options.fn(item);
+            }).join('');
+        },
+
+       json: function(context) {
+            return JSON.stringify(context);
+        }
     },
     defaultLayout: 'main',
     // Uses multiple partials dirs, templates in "shared/templates/" are shared
@@ -112,16 +119,7 @@ app.use(express.bodyParser());
 app.use(app.router);
 
 app.configure(function () {
-    /*
-    app.use(lessMiddleware({
-        dest: '/css',
-        src: '/less',
-        prefix: '/css',
-        root: pubDir,
-        debug: true,
-        force: true
-    }));
-*/
+
     app.use(express.static(pubDir));
 });
 
@@ -163,7 +161,6 @@ function exposeTemplates(req, res, next) {
         next();
     });
 }
-
 
 app.get('/', exposeTemplates, routes.home);
 

@@ -1,8 +1,8 @@
 <section class="timeline-fb">
 	<header></header>
 	<aside class="fb-feed">
-
-		{{> timeline/fb/box }}
-		
+		{{#foreach this.elements}}
+			{{> timeline/fb/box }}
+		{{/foreach}}
 	</aside>  <!-- /fb-feed-->
 </section> <!-- /timeline-fb-->

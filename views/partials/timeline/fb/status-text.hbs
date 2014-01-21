@@ -1,7 +1,10 @@
 <div class="fb-status-text">
 	<p class="fb-status-text-cnt">
-		{{{fbStatusMsg this.item.message}}} ‪
-		
+		{{#if this.item.message}}	
+		{{{fbStatusMsg this.item.message}}}
+		{{else}}
+		{{{fbStatusMsg this.item.story}}}
+		{{/if}}
 		<!--<a href="#">#‎whyamisostressed</a>‬ <a href="#">‪#‎dammit‬</a>-->
 	</p>
 	<a href="#" class="fb-see-more"> See More </a>

@@ -15,9 +15,9 @@
 	<div class="fb-comments-total">
 		<a href="#"> View {{fbCommentMoreTotal this.item.comments.summary.total_count}} more comment </a>
 	</div>
-	{{#each this.item.comments.data}}
-		{{> timeline/fb/comment}}
-	{{/each}}
+		{{#foreachSlice this.item.comments.data 'last' '4'}}
+				{{> timeline/fb/comment}}
+		{{/foreachSlice}}
 	{{/if}}
 
 	<div class="fb-comment-write">

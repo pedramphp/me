@@ -19,8 +19,7 @@
     <script>
 
 
-    var a = JSON.parse({{data.timeline}});
-    console.log(a);
+    console.log({{{json data}}});
         (function () {
             var revive    = Handlebars.template,
                 templates = Handlebars.templates = Handlebars.templates || {};
