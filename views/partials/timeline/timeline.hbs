@@ -10,5 +10,9 @@
 			{{> timeline/instagram/instagram }}
 
 		{{/ifStringEqual}}
+		{{#ifStringEqual this.type "twitter"}}
+			{{> timeline/twitter/twitter }}
+
+		{{/ifStringEqual}}		
 	{{/each}}
 </div>

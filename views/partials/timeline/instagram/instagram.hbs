@@ -4,7 +4,7 @@
 		{{#foreach this.elements}}
 			<div class="relative">
 				<div class="timeline-curtime">{{timeHourMin this.created_time}}</div>
-				{{> timeline/instagram/box }}
+				{{> timeline/instagram/box this.item}}
 			</div>
 		{{/foreach}}
 	</aside>  <!-- /ig-feed-->

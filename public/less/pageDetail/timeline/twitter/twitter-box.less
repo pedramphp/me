@@ -1,0 +1,53 @@
+@import "../../../core/core.less";
+
+@twitter-header-bg-color: #55acee;
+
+.me-timeline .timeline-twitter{
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+	font-size: 13px;
+	line-height: 17px;
+	
+	> header{
+		background: @twitter-header-bg-color;	
+		&::before{
+			.absolute();
+			left: 12px;
+			top: 8px;
+			content: "t";
+			color: #fff;
+			font-size: 20px;
+		}
+	}
+
+	> aside{
+		margin-top: 0;
+		margin-left: 32px;
+		width: 94%;
+
+		.timeline-curtime{
+			right: -71px;
+		}
+	}
+}
+
+.twitter-user-img{
+	border-radius: 5px;
+}
+
+
+.twitter-feed{
+
+	.twitter-box{
+		border-bottom: 1px solid #e1e8cd;
+		cursor: pointer;
+		background: #fff;
+	}
+
+	.twitter-link{
+		color: #42c2ef;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+
+}

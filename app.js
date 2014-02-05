@@ -40,7 +40,10 @@ hbs = exphbs.create({
 
         fromNow: function(timestamp){
             return moment(timestamp).fromNow();
-            //return 
+        },
+
+        fromNowShort: function(timestamp){
+            return moment(timestamp).fromNow(true);
         },
 
         timeHourMin: function(timestamp){

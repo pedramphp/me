@@ -18,3 +18,4 @@ node_modules
 public/production
 public/uglify
 public/css
+public/js-uglify/

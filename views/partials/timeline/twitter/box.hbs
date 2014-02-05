@@ -1,0 +1,37 @@
+<div class="twitter-box{{#if $last}} last{{/if}}">
+
+	<header class="twitter-profile">
+		<span class="twitter-user-img-large">
+			<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-user-img-link" target="_blank">
+				<img src="{{this.user.profile_image_url}}" />
+			</a>
+		</span>
+	</header>
+
+	<div class="twitter-cntr">
+		<div class="twitter-user-info">
+			<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-link" target="_blank">
+				{{this.user.name}}
+			</a>
+			<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-link" target="_blank">
+				@{{this.user.screen_name}}
+			</a>
+			<a href="#">
+			{{fromNowShort this.created_time}}. 
+			</a>
+		</div>
+	</div>
+
+
+	<div class="twitter-status-text">
+	{{{this.text}}}
+	</div>
+
+	<div class="twitter-image">
+		<a href="#">
+
+			<img src="{{this.images.standard_resolution.url}}" />
+		</a>
+	</div>
+
+</div><!-- /twitter-box-->

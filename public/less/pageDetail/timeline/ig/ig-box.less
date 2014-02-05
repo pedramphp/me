@@ -1,21 +1,28 @@
 @import "../../../core/core.less";
 
+@ig-link-color: #3f729b;
+@ig-link-hover-color: #1c5380;
+
+.ig-feed a,
+.ig-feed a:visited{
+	color: @ig-link-color;
+	text-decoration: none;
+	font-size: 13px;
+}
+
+.ig-feed a:hover{
+	color: @ig-link-hover-color;
+	text-decoration: underline;
+}
+
 .ig-link{
 	display: inline-block;
-	color: #3f729b;
-	text-decoration: none;
 	font-weight: bold;
 	font-size: 12px;
-	color: #3f729b;
-
-	&:hover{
-		color: #1c5380;
-	}
 }
 
 .ig-user-img(@size){
 	display: inline-block;
-	height: @size;
 	line-height: @size;
 	position: relative;
 
@@ -28,11 +35,22 @@
 		height: @size;
 	}
 
+	> span{
+		display: block;
+		margin-left: (@size + 10);
+	}
+
 	> .ig-link{
 		margin-left: (@size + 10);
 	}
 
 }
+
+.ig-msg-box(){
+	.relative();
+	padding: 5px 12px 12px 12px;	
+}
+
 
 .ig-user-img-large{
 	.ig-user-img(50px);
@@ -71,6 +89,7 @@
 	}
 }
 
+
 .ig-box{
 	.relative();
 	margin-bottom: 10px;
@@ -94,10 +113,16 @@
 	.ig-image > a  > img {
 		width: 100%;
 	}
+	
+
 
 	.ig-status{
-		padding: 5px 12px 12px 12px;
-		border-bottom: 1px solid #e6e6e6;
+		.ig-msg-box();
+		border-bottom: 1px solid #e6e6e6;	
+		.box-shadow("0 1px 2px rgba(0, 0, 0, 0.04)");
+	}
 
+	.ig-comment{
+		.ig-msg-box();
 	}
 }

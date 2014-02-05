@@ -2,31 +2,51 @@
 
 	<header class="ig-profile">
 		<span class="ig-user-img-large">
-			<a href="#" class="ig-user-img-link">
-				<img src="{{this.item.user.profile_picture}}" />
+			<a href="http://instagram.com/{{this.user.username}}" class="ig-user-img-link" target="_blank">
+				<img src="{{this.user.profile_picture}}" />
 			</a>
-			<a href="#" class="ig-link">
-				{{this.item.user.username}}
+			<a href="http://instagram.com/{{this.user.username}}" class="ig-link" target="_blank">
+				{{this.user.username}}
 			</a>
 		</span>
 	</header>
 
 	<div class="ig-image">
 		<a href="#">
-			<img src="{{this.item.images.standard_resolution.url}}" />
+			<img src="{{this.images.standard_resolution.url}}" />
 		</a>
 	</div>
 
 	<div class="ig-status">
 		<span class="ig-user-img-small">
 			<a href="#" class="ig-user-img-link">
-				<img src="{{this.item.user.profile_picture}}" />
+				<img src="{{this.user.profile_picture}}" />
 			</a>
-			<a href="#" class="ig-link">
-				{{this.item.user.username}}
-			</a>
+			<span>
+				<a href="#" class="ig-link">
+					{{this.user.username}}
+				</a>
+				{{{igMsg this.caption.text}}}
+			</span>
 		</span>
-		
+	</div>
+
+	<div class="ig-comments">
+		{{#foreach this.comments.data}}
+		<div class="ig-comment">
+			<span class="ig-user-img-small">
+				<a href="#" class="ig-user-img-link">
+					<img src="{{this.from.profile_picture}}" />
+				</a>
+				<span>
+					<a href="#" class="ig-link">
+						{{this.from.username}}
+					</a>
+					{{{igMsg this.text}}}
+				</span>
+			</span>		
+		</div>
+		{{/foreach}}
 	</div>
 
 </div><!-- /ig-box-->

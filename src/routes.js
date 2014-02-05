@@ -72,6 +72,15 @@ exports.home = function(req, res){
 				                return 0;
 				            }
 				            return totalComment;
+				        },
+
+				        igMsg: function(msg){
+							if(!msg){
+								return "";
+							}
+							return msg.replace(/@(\S*)/g, function(match, p1, offset, string){
+								return "<a href='http://instagram.com/" + p1 +"' target='_blank' >"+ match +"</a>";
+							});
 				        }
 			        },
 			        layout: "main"
