@@ -1,6 +1,9 @@
 @import "../../../core/core.less";
 
 @twitter-header-bg-color: #55acee;
+@twitter-blue-color: #2FC2EF;
+@twitter-black-color: #292F34;
+@twitter-gray-color: #999;
 
 .me-timeline .timeline-twitter{
 	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
@@ -30,24 +33,60 @@
 	}
 }
 
-.twitter-user-img{
-	border-radius: 5px;
+
+
+.twitter-avatar-large{
+	
+	> img{
+		width: 48px;
+		height: 48px;
+		border-radius: 5px
+	}
+
+}
+
+.twitter-black-link{
+	color: @twitter-black-color;
+	text-decoration: none;
+	font-size: 14px;
+	&:hover{
+		text-decoration: underline;
+		color: @twitter-blue-color;
+	}
+}
+
+.twitter-gray-link{
+	.twitter-gray-link-no-hover();
+	&:hover{
+		text-decoration: underline;
+		color: @twitter-blue-color;
+	}
+}
+
+.twitter-gray-link-no-hover{
+	color: @twitter-gray-color;
+	text-decoration: none;
+	font-size: 13px;
 }
 
 
-.twitter-feed{
+.twitter-box{
+	.relative();
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+	border-bottom: 1px solid #e1e8cd;
+	cursor: pointer;
+	background: #fff;
+	min-height: 68px;
+	padding-bottom: 1px;
 
-	.twitter-box{
-		border-bottom: 1px solid #e1e8cd;
-		cursor: pointer;
-		background: #fff;
+	.twitter-box-left{
+		.absolute();
+		width: 48px;
+		left: 10px;
+		top: 10px;
 	}
 
-	.twitter-link{
-		color: #42c2ef;
-		&:hover{
-			text-decoration: underline;
-		}
+	.twitter-box-content{
+		margin: 10px 10px 10px 74px;
 	}
-
 }

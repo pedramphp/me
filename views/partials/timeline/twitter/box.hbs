@@ -1,37 +1,24 @@
 <div class="twitter-box{{#if $last}} last{{/if}}">
 
-	<header class="twitter-profile">
-		<span class="twitter-user-img-large">
-			<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-user-img-link" target="_blank">
-				<img src="{{this.user.profile_image_url}}" />
-			</a>
-		</span>
-	</header>
-
-	<div class="twitter-cntr">
+	<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-avatar-large twitter-box-left" target="_blank">
+		<img src="{{this.user.profile_image_url}}" />
+	</a>
+	<aside class="twitter-box-content">
 		<div class="twitter-user-info">
-			<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-link" target="_blank">
+			<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-black-link" target="_blank">
 				{{this.user.name}}
 			</a>
-			<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-link" target="_blank">
+			<a href="http://twitter.com/{{this.user.screen_name}}" class="twitter-gray-link-no-hover" target="_blank">
 				@{{this.user.screen_name}}
 			</a>
-			<a href="#">
+			<a href="#" class="twitter-gray-link">
 			{{fromNowShort this.created_time}}. 
 			</a>
 		</div>
-	</div>
 
+		<div class="twitter-status-text">
+			{{{this.text}}}
+		</div>
 
-	<div class="twitter-status-text">
-	{{{this.text}}}
-	</div>
-
-	<div class="twitter-image">
-		<a href="#">
-
-			<img src="{{this.images.standard_resolution.url}}" />
-		</a>
-	</div>
-
+	</aside> <!-- /twitter-box-content-->
 </div><!-- /twitter-box-->
